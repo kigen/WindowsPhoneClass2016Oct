@@ -28,10 +28,12 @@ namespace ContactManagement
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
+        private Contact contact = new Contact();
+
         public AddContactPage()
         {
             this.InitializeComponent();
-
+            DataContext = contact;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -111,20 +113,7 @@ namespace ContactManagement
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Contact contact = new Contact()
-            {
-                Email = txtEmail.Text,
-                PhoneNumber = txtPhone.Text,
-                Name = txtName.Text
-            };
-
-            App app = Application.Current as App;
-            if (app != null)
-            {
-                app.Contact = contact;
-            }
-
             Frame.Navigate(typeof (ViewContact), contact);
         }
-         }
+     }
 }
