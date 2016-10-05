@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -30,7 +31,7 @@ namespace ContactManagement
         public Contact Contact { get; set; }
 
         //In memory storage for the list of contacts.
-        public List<Contact> Contacts { get; set; }
+        public ObservableCollection<Contact> Contacts { get; set; }
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code

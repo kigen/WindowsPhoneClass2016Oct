@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using ContactManagement.Common;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -25,8 +26,11 @@ namespace ContactManagement
         public MainPage()
         {
             this.InitializeComponent();
-
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            LvContacts.ReorderMode = ListViewReorderMode.Enabled;
+            LvContacts.SelectionMode = ListViewSelectionMode.Multiple;
+
+           
         }
 
         /// <summary>
@@ -36,24 +40,11 @@ namespace ContactManagement
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-           App app = Application.Current as App;
+            App app = Application.Current as App;
             if (app != null)
             {
-                List<Contact> contacts = app.Contacts;
-                LvContacts.ItemsSource = contacts;
+                LvContacts.ItemsSource = app.Contacts;
             }
-
-
-           /* List<Contact> contacts = new List<Contact>()
-            {
-                new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"},
-                new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"},
-                new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"},
-                new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"}
-            };
-
-            LvContacts.ItemsSource = contacts;*/
-
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
