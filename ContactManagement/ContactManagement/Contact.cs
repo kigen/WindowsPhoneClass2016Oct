@@ -16,8 +16,8 @@ namespace ContactManagement
                 this.SetProperty(ref this._name, value); 
             }
         }
+        
         private string _email;
-
         public string Email
         {
             get { return _email; }
