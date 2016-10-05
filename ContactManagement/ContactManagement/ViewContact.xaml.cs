@@ -102,18 +102,14 @@ namespace ContactManagement
         {
             this.navigationHelper.OnNavigatedTo(e);
 
-            App app = Application.Current as App;
-            if (app != null)
-            {
-                contact = app.Contact;
-            }
-            //contact = e.Parameter as Contact;
-            if (contact != null)
+           contact = e.Parameter as Contact;
+           DataContext =  contact;
+            /*if (contact != null)
             {
                 tbName.Text = contact.Name;
                 tbPhone.Text = contact.PhoneNumber;
                 tbEmail.Text = contact.Email;
-            }
+            }*/
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
