@@ -40,7 +40,6 @@ namespace ContactManagement
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
-            Contacts = new List<Contact>();
         }
 
         /// <summary>

@@ -36,23 +36,23 @@ namespace ContactManagement
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            /*App app = Application.Current as App;
+           App app = Application.Current as App;
             if (app != null)
             {
-                LvContacts.ItemsSource = app.Contacts;
-                LvContacts.UpdateLayout();
-            }*/
+                List<Contact> contacts = app.Contacts;
+                LvContacts.ItemsSource = contacts;
+            }
 
 
-            List<Contact> contacts = new List<Contact>()
+           /* List<Contact> contacts = new List<Contact>()
             {
                 new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"},
                 new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"},
                 new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"},
-                new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"},
+                new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"}
             };
 
-            LvContacts.ItemsSource = contacts;
+            LvContacts.ItemsSource = contacts;*/
 
         }
 

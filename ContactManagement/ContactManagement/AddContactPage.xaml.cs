@@ -28,12 +28,11 @@ namespace ContactManagement
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        private Contact contact = new Contact();
+        private Contact contact;
 
         public AddContactPage()
         {
             this.InitializeComponent();
-            DataContext = contact;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -102,6 +101,9 @@ namespace ContactManagement
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
+           contact = new Contact();
+            DataContext = contact;
+
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -116,6 +118,9 @@ namespace ContactManagement
             App app = Application.Current as App;
             if (app != null)
             {
+                if(app.Contacts==null)
+                    app.Contacts = new List<Contact>();
+
                 app.Contacts.Add(contact);
             }
             Frame.GoBack();
