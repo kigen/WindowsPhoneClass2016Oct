@@ -113,7 +113,12 @@ namespace ContactManagement
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof (ViewContact), contact);
+            App app = Application.Current as App;
+            if (app != null)
+            {
+                app.Contacts.Add(contact);
+            }
+            Frame.GoBack();
         }
      }
 }

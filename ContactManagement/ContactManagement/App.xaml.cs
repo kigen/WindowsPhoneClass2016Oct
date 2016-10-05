@@ -29,6 +29,9 @@ namespace ContactManagement
 
         public Contact Contact { get; set; }
 
+        //In memory storage for the list of contacts.
+        public List<Contact> Contacts { get; set; }
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -37,6 +40,7 @@ namespace ContactManagement
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            Contacts = new List<Contact>();
         }
 
         /// <summary>
