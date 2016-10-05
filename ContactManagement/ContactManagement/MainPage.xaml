@@ -30,8 +30,25 @@
             <TextBlock Text="MY CONTACTS" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
             <TextBlock Text="Contacts" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
-
-        <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0"/>
+        
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+            <ListView x:Name="LvContacts" HorizontalAlignment="Left" Height="441" VerticalAlignment="Top" Width="362">
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <Grid d:DesignWidth="385" d:DesignHeight="79.5" Width="480" Background="#FFD41919" Height="90">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="49*"/>
+                                <ColumnDefinition Width="191*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="90" Source="Assets/user_male2-512.png" Margin="10,10,0,0" Grid.ColumnSpan="2"/>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="375" Margin="1.667,0,0,0">
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Name}" Margin="10,10,0,10" FontFamily="Segoe WP" FontSize="20" Foreground="Black"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding PhoneNumber}" Margin="10,0,0,0" FontFamily="Segoe WP" FontSize="16" Foreground="Black"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>

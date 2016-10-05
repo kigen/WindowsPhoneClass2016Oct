@@ -36,13 +36,24 @@ namespace ContactManagement
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // TODO: Prepare page for display here.
+            /*App app = Application.Current as App;
+            if (app != null)
+            {
+                LvContacts.ItemsSource = app.Contacts;
+                LvContacts.UpdateLayout();
+            }*/
 
-            // TODO: If your application contains multiple pages, ensure that you are
-            // handling the hardware Back button by registering for the
-            // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
-            // If you are using the NavigationHelper provided by some templates,
-            // this event is handled for you.
+
+            List<Contact> contacts = new List<Contact>()
+            {
+                new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"},
+                new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"},
+                new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"},
+                new Contact(){ Name = "Sekiki",PhoneNumber = "0490394390"},
+            };
+
+            LvContacts.ItemsSource = contacts;
+
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
