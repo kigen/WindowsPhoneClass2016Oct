@@ -5,9 +5,11 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -116,11 +118,19 @@ namespace ContactManagement
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Settings setting  = new Settings();
-            List<Contact> contacts = setting.Contacts;
-            contacts.Add(contact);
-            setting.Contacts = contacts;
-            Frame.GoBack();
+
+            Task<Contact> task= Task.Run<Contact>(async() => await Proxy.PostContact(contact));
+            
+            Contact contactRes= task.Result;
+
+            if (contactRes != null)
+            {
+                Frame.GoBack();
+            }
+            else
+            {
+              new MessageDialog("It has failed to save").ShowAsync();
+            }
         }
      }
 }

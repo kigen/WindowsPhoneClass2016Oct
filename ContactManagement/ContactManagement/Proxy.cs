@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 using PortableRest;
 
 namespace ContactManagement
@@ -7,18 +8,17 @@ namespace ContactManagement
     public class Proxy
     {
         private const string URL = "http://apicontacts.azurewebsites.net/";
-        public static Contact PostContact(Contact contact)
+        public static async Task<Contact> PostContact(Contact contact)
         {
             var client = new RestClient {BaseUrl = URL};
             
             RestRequest request = new 
-                RestRequest("contact/", HttpMethod.Post);
-
+                RestRequest("contacts/", HttpMethod.Post);
+            request.ContentType = ContentTypes.Json;
             request.AddParameter(contact);
+            var response = await client.ExecuteAsync<Contact>(request);
 
-            var response = client.ExecuteAsync<Contact>(request);
-
-            return response.Result;
+            return response;
         }
 
 
@@ -27,7 +27,7 @@ namespace ContactManagement
             var client = new RestClient { BaseUrl = URL };
 
             RestRequest request = new
-                RestRequest("contact/", HttpMethod.Get);
+                RestRequest("contacts/", HttpMethod.Get);
 
             var response = client.ExecuteAsync<List<Contact>>(request);
 
