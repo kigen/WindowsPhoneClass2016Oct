@@ -40,11 +40,7 @@ namespace ContactManagement
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            App app = Application.Current as App;
-            if (app != null)
-            {
-                LvContacts.ItemsSource = app.Contacts;
-            }
+            LvContacts.ItemsSource = new Settings().Contacts;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)

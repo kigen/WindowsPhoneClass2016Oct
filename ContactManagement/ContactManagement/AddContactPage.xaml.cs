@@ -116,14 +116,8 @@ namespace ContactManagement
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            App app = Application.Current as App;
-            if (app != null)
-            {
-                if(app.Contacts==null)
-                    app.Contacts = new ObservableCollection<Contact>();
-
-                app.Contacts.Add(contact);
-            }
+            Settings setting  = new Settings();
+            setting.Contacts.Add(contact);
             Frame.GoBack();
         }
      }
