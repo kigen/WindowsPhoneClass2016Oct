@@ -27,11 +27,9 @@ namespace ContactManagement
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
-            LvContacts.ReorderMode = ListViewReorderMode.Enabled;
-            LvContacts.SelectionMode = ListViewSelectionMode.Multiple;
-
-           
         }
+
+
 
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
