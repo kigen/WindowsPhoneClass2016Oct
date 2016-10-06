@@ -18,8 +18,14 @@ namespace ContactManagement
        {
            get
            {
-               return _localSettings.Values["contacts"] 
-                   as List<Contact>;
+               if (_localSettings.Values.ContainsKey("contacts"))
+               {
+                   return _localSettings.Values["contacts"]
+                       as List<Contact>;
+               }else
+               {
+                   return new List<Contact>();
+               }
            }
 
            set

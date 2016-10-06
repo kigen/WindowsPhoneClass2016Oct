@@ -117,7 +117,9 @@ namespace ContactManagement
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             Settings setting  = new Settings();
-            setting.Contacts.Add(contact);
+            List<Contact> contacts = setting.Contacts;
+            contacts.Add(contact);
+            setting.Contacts = contacts;
             Frame.GoBack();
         }
      }
