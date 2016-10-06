@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ContactManagement
 {
@@ -40,13 +41,25 @@ namespace ContactManagement
 
        private List<Contact> fromJson(string json)
        {
+           return JsonConvert.
+               DeserializeObject(json, typeof (List<Contact>)) 
+               as List<Contact>;
+       }
+       private String toJson(List<Contact> contacts)
+       {
+           return JsonConvert.SerializeObject(contacts);
+       }
+
+
+       private List<Contact> _fromJson(string json)
+       {
            DataContractJsonSerializer serializer =
                new DataContractJsonSerializer(typeof(List<Contact>));
 
            return serializer.ReadObject(getStream(json)) as List<Contact>;
        }
 
-       private String toJson(List<Contact> contacts)
+       private String _toJson(List<Contact> contacts)
        {
            DataContractJsonSerializer serializer =
                new DataContractJsonSerializer(typeof(List<Contact>));
