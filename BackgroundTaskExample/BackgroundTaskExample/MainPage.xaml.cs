@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using Windows.ApplicationModel.Background;
 using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
@@ -14,7 +16,7 @@ namespace BackgroundTaskExample
     public sealed partial class MainPage : Page
     {
 
-        private const string MyTask = "CalculatorTask";
+        private const string MyTask = "OurTask.CalculatorTask";
 
         public MainPage()
         {
@@ -47,15 +49,15 @@ namespace BackgroundTaskExample
         /// </summary>
         void CheckTask()
         {
-            var registration = BackgroundTaskRegistration.AllTasks.Values.FirstOrDefault(x => x.Name == MyTask);
-            if (registration == null)
-            {
+           // var registration = BackgroundTaskRegistration.AllTasks.Values.FirstOrDefault(x => x.Name == MyTask);
+            //if (registration == null)
+            //{
                 RegisterTask();
-            }
-            else
-            {
-                registration.Completed += taskRegistration_Completed;
-            }
+            //}
+            //else
+            //{
+             //   registration.Completed += taskRegistration_Completed;
+            //}
         }
 
       
@@ -74,13 +76,14 @@ namespace BackgroundTaskExample
 
             //Specify the condition if available. 
             var condition = new SystemCondition(SystemConditionType.UserPresent);
-            taskBuilder.AddCondition(condition);
+            //taskBuilder.AddCondition(condition);
 
             //Specify the entry point of the TASK. 
-            taskBuilder.TaskEntryPoint = typeof (OurTask.CalculatorTask).Name;
+            taskBuilder.TaskEntryPoint = typeof (OurTask.CalculatorTask).FullName;
 
             BackgroundTaskRegistration taskRegistration = taskBuilder.Register();
             taskRegistration.Completed += taskRegistration_Completed;
+      
 
         }
 
@@ -102,12 +105,19 @@ namespace BackgroundTaskExample
                 int b = (int)localsettings.Values["b"];
                 string time = localsettings.Values["time"].ToString();
 
-                tbResult.Text = string
-                    .Format(
-                    "The sum of {0} and {1} is {2}, task ran at {3}",a,b,sum,time
-                    );
-
+                Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    tbResult.Text = string
+                  .Format(
+                  "The sum of {0} and {1} is {2}, task ran at {3}", a, b, sum, time
+                  );
+                });
             }
+        }
+
+        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+           
         }
 
     }
