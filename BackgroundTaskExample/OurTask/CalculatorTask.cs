@@ -32,6 +32,7 @@ namespace OurTask
 
             //Update Tile 
             UpdateTile();
+            SendToast();
 
             deferral.Complete();
         }
@@ -42,11 +43,9 @@ namespace OurTask
             var xml = @"<tile> " +
                       "<visual version=\"2\">" +
                       "<binding template=\"TileSquare150x150PeekImageAndText01\" fallback=\"TileSquarePeekImageAndText01\">" +
-                      "<image id=\"1\" src=\"ms-appx:///Assets/image.JPG\"/>" +
-                      "<text id=\"1\">Row 0</text>" +
-                      " <text id=\"2\">Row 1</text>" +
-                      "<text id=\"3\">Row 2</text>" +
-                      "<text id=\"4\">Row 3</text>" +
+                      "<image id=\"1\" src=\"ms-appx:///Assets/Square150x150Logo.scale-240.png\"/>" +
+                      "<text id=\"1\">This is my APP</text>" +
+                      "<text id=\"2\">This app works.. try it out.</text>" +
                       " </binding>" +
                       " </visual>" +
                       "</tile>";
@@ -59,6 +58,26 @@ namespace OurTask
                 .CreateTileUpdaterForApplication();
 
             updater.Update(tile);
+        }
+
+
+        void SendToast()
+        {
+
+            XmlDocument toastDocument = new XmlDocument();
+            var xml = @"<toast> " +
+                        "<visual>" +
+                            "<binding template=\"ToastText02\" >" +
+                                "<text id=\"1\">This is as toast</text>" +
+                                "<text id=\"2\">This toast will launch an app</text>" +
+                            " </binding>" +
+                        " </visual>" +
+                     "</toast>";
+
+            toastDocument.LoadXml(xml);
+
+            ToastNotification toastNotification = new ToastNotification(toastDocument);
+            ToastNotificationManager.CreateToastNotifier().Show(toastNotification);
         }
     }
 }
