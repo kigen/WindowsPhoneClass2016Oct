@@ -2,6 +2,7 @@
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Storage.Streams;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
@@ -26,18 +27,34 @@ namespace MyMaps
 
             geolocator = new Geolocator();
             geolocator.MovementThreshold = 100;
-            geolocator.DesiredAccuracy = PositionAccuracy.High;
-            geolocator.DesiredAccuracyInMeters = 5;
-            geolocator.ReportInterval = 60000;
-            geolocator.PositionChanged += geolocator_PositionChanged;
+            //geolocator.PositionChanged += geolocator_PositionChanged;
+
+            MyMap.Drop += MyMap_Drop;
         }
+
+        void MyMap_Drop(object sender, DragEventArgs e)
+        {
+            MapIcon mapIcon = new MapIcon();
+            Geopoint mypoint; 
+            //MyMap.GetLocationFromOffset()
+        }
+
+        
+
+       
+
 
         void geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
-            MyMap.Center = new Geopoint(new BasicGeoposition(){
-                    Latitude =  args.Position.Coordinate.Latitude,
+
+            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                MyMap.Center = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = args.Position.Coordinate.Latitude,
                     Longitude = args.Position.Coordinate.Longitude,
                 });
+            });
         }
 
         /// <summary>
@@ -56,7 +73,7 @@ namespace MyMaps
             // this event is handled for you.
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void  Page_Loaded(object sender, RoutedEventArgs e)
         {
             Geopoint centerGeopoint  = new Geopoint(new BasicGeoposition(){Latitude = -1.2,Longitude = 36.7},0);
             MyMap.Center = centerGeopoint;
@@ -71,7 +88,20 @@ namespace MyMaps
                 RandomAccessStreamReference
                 .CreateFromUri(new Uri("ms-appx:///Assets/marker.png"));
 
+
             MyMap.MapElements.Add(mapIcon);
+
+            //Gettting the location without using the location changed events. 
+            Geoposition gpsPosition = await geolocator.GetGeopositionAsync(); 
+
+              MyMap.Center = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = gpsPosition.Coordinate.Latitude,
+                    Longitude = gpsPosition.Coordinate.Longitude,
+                });
+
+
+           
         }
     }
 }
