@@ -188,3 +188,8 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 /ContactManagement/packages
+*.pubxml
+/NotesAPP.BackendService/NotesAPP.BackendService/Properties/PublishProfiles/*.pubxml
+/NotesAPP.BackendService/NotesAPP.BackendService/Properties/PublishProfiles/*.user
+*.pubxml
+*.user
