@@ -1,37 +1,40 @@
-# API Documents
+# NotesAPP Backend API.
 This is a simple API document for a simple note taking mobile application backend service.
 
 ## API End points
-### Post Notes.
+------------------------
+### 1.  Post Notes.
  - Path: /notes
  - Method: POST
  - ContentType: application/json
- - Request Payload example:
- ```json
-    {
-        "Title":"First Note",
-        "Content" : "To do something about this task.",
-        "Category":"Tasks",
-        "Latitude": -1.2,
-        "Longitude": 36.0,
-        "User": "{your student numbers separated by - eg 12447-85888-85858}"
-    }
-    ```
 
-- Response example:
-    ```json
-    {
-      "NoteID":1,
-      "Title":"First Note",
-      "Content" : "To do something about this task.",
-      "Category":"Tasks",
-      "Latitude": -1.2,
-      "Longitude": 36.0,
-      "User":"1234-5678-9876"
-    }
-    ```
+#### Request Payload example:
 
-###Fetch your notes:
+```json
+{
+    "Title":"First Note",
+    "Content" : "To do something about this task.",
+    "Category":"Tasks",
+    "Latitude": -1.2,
+    "Longitude": 36.0,
+    "User": "{your student numbers separated by - eg 12447-85888-85858}"
+}
+```
+
+### Response example:
+```json
+{
+  "NoteID":1,
+  "Title":"First Note",
+  "Content" : "To do something about this task.",
+  "Category":"Tasks",
+  "Latitude": -1.2,
+  "Longitude": 36.0,
+  "User":"1234-5678-9876"
+}
+```
+
+### 2. Fetch your notes:
 Fetch notes from the service.
 - Path:
   * All Notes: /notes/
