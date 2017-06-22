@@ -22,8 +22,7 @@ namespace BackgroundTaskExample
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
-            CheckTask();
-            GetTaskresult();
+           
         }
 
         /// <summary>
@@ -40,6 +39,8 @@ namespace BackgroundTaskExample
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+            CheckTask();
+            GetTaskresult();
         }
 
 
@@ -49,15 +50,15 @@ namespace BackgroundTaskExample
         /// </summary>
         void CheckTask()
         {
-           // var registration = BackgroundTaskRegistration.AllTasks.Values.FirstOrDefault(x => x.Name == MyTask);
-            //if (registration == null)
-            //{
+            var registration = BackgroundTaskRegistration.AllTasks.Values.FirstOrDefault(x => x.Name == MyTask);
+            if (registration == null)
+            {
                 RegisterTask();
-            //}
-            //else
-            //{
-             //   registration.Completed += taskRegistration_Completed;
-            //}
+            }
+            else
+            {
+                registration.Completed += taskRegistration_Completed;
+            }
         }
 
       
